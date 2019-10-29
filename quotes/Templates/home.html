@@ -1,0 +1,39 @@
+
+{% extends 'base.html' %}
+
+<h1>Random stuff</h1>
+
+{% block content_anyName %}
+
+<h1>Hello World</h1>
+<h1>Random stuff outside the block this will get succked in</h1>
+<h1>stuff witin the block I want to actually keep</h1>
+
+the symbol is : {{ returnStuff.symbol }}
+<br/>
+<br/>
+{{ returnStuff }}
+
+{% if ticker %}
+    {{ ticker }}
+{% endif %}  
+
+{% if returnStuff %}
+    {% if returnStuff == 'Error...' %}  
+        There was a problem with your ticker.. try again
+    {% else %}   
+    
+        <h1>{{ returnStuff.companyName }}</h1><br/>
+        price: $ {{ returnStuff.latestPrice }}<br/>
+        previousClose: {{ returnStuff.previousClose }}<br/>
+        marketCap: {{ returnStuff.marketCap }}<br/>
+        ytdChange: {{ returnStuff.ytdChange }}<br/>
+        week52High: {{ returnStuff.week52High }}<br/>
+        week52Low: {{ returnStuff.week52Low }}<br/>
+    {% endif %}    
+{% else %}    
+    blah
+
+{% endif %}    
+
+{% endblock %}

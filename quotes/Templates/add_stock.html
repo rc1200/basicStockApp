@@ -19,49 +19,34 @@
   <thead class="thead-dark">
     <tr>
       <th scope="col">Company Name</th>
-      <th scope="col">Stock Price</th>
-      <th scope="col">marketCap</th>
+      <th>Stock Price</th>
+      <th>marketCap</th>
+      <th>Delete</th>
     </tr>
   </thead>
   <tbody>
 
-{% if ticker %}
-    {% for i in ticker %}
+{% if myDict %}
+    {% for k, v in myDict.items %}
         <tr>
-        <th scope="row">{{ i.companyName }}</th>
-        <td>{{ i.latestPrice }}</td>
-        <td>{{ i.marketCap }}</td>
-        <td><a href="{% url 'delete' i.id %}">delete stock </a></td>
+            <th scope="row">
+            {% if v.symbol %}
+                {{ v.symbol }}
+            {% else %}
+                {{ k }}
+            {% endif %}
+            </th>
+            <td>{{ v.latestPrice }}</td>
+            <td>{{ v.marketCap }}</td>
+            <td><a href="{% url 'delete' k %}">delete stock </a></td>
         </tr>
     {% endfor %}
 {% endif %}
 
-{% if output %}
-    {% for i in output %}
-        <tr>
-        <th scope="row">{{ i.companyName }}</th>
-        <td>{{ i.latestPrice }}</td>
-        <td>{{ i.marketCap }}</td>
-        
-        </tr>
-    {% endfor %}
-{% endif %}
+
 
   </tbody>
 </table>
-
-
-
-
-{% for i in ticker %}
-    {{ i }} | <a href="{% url 'delete' i.id %}">{{ i.id }} </a>  <br/>
-{% endfor %}
-
-{% for i in output %}
-    {{ i.companyName }}
-    {{ i.latestPrice }}
-    {{ i.marketCap }}
-{% endfor %}
 
 
 {% endblock%}
